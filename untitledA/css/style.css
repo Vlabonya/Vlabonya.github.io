@@ -218,20 +218,18 @@ main {
     color: var(--muted);
 }
 
-/* ===== BUTTONS ===== */
 .btn-primary {
     display: block;
     width: 100%;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-size: 18px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    font-size: 20px;
     font-weight: 700;
-    background-color: var(--primary-color);
+    background: linear-gradient(180deg, var(--primary-light), var(--primary-light));
     color: var(--white);
     border: none;
-    cursor: pointer;
-    box-shadow: 0 12px 30px rgba(255, 0, 107, 0.12);
-    transition: all 0.12s ease;
+    box-shadow: none;
+    opacity: 0.96;
 }
 
 .btn-primary:hover:not(.disabled):not([disabled]) {
@@ -337,10 +335,10 @@ footer {
 
 .modal-content {
     background-color: var(--white);
-    border-radius: 18px;
+    border-radius: 20px;
     width: 100%;
     max-width: 920px;
-    padding: 28px 34px;
+    padding: 30px 30px;
     position: relative;
     box-shadow: 0 30px 60px rgba(7, 12, 20, 0.18);
     gap: 24px;
@@ -360,28 +358,32 @@ footer {
     color: var(--gray-800);
 }
 
-/* ===== FORMS ===== */
+
 .form-tabs {
     display: flex;
-    justify-content: center;
-    gap: 28px;
-    margin-bottom: 18px;
-    align-items: center;
+    justify-content: center; /* если нужно слева: flex-start */
+    gap: 46px;                /* расстояние между надписями */
+    margin-bottom: 6px;
+    align-items: flex-end;
+    padding: 6px 0 0 0;
 }
 
 .form-tab {
-    font-size: 22px;
-    color: #bdbdbd;
+    font-size: 44px;        /* масштаб заголовка */
+    line-height: 1;
+    color: #cfcfcf;         /* светлый неактивный */
     cursor: pointer;
-    font-weight: 600;
-    padding: 8px 6px;
-    border-bottom: none;
+    font-weight: 400;
+    padding: 6px 6px;
+    letter-spacing: 0.2px;
     position: relative;
+    transition: color .15s ease, transform .12s ease;
 }
 
 .form-tab.active {
     color: var(--black);
-    font-weight: 700;
+    font-weight: 400;
+    transform: translateY(0);
 }
 
 .form-tab.active::after {
@@ -389,27 +391,29 @@ footer {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -6px;
-    width: 36px;
-    height: 3px;
-    background: var(--primary-color);
-    border-radius: 3px;
+    bottom: -12px;          /* расстояние от текста до линии */
+    width: 56px;            /* ширина линии */
+    height: 6px;            /* толщина линии */
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(255,0,107,0.08);
 }
 
 .form-container {
-    display: none;
-    background: var(--white);
-    border-radius: 12px;
-    padding: 18px;
-    border: 2px solid transparent;
-    transition: all 0.18s ease;
+    display: none; /* управляется классом .active */
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 20px 0 22px 0;
+    border-radius: 0;
 }
 
 .form-container.active {
     display: block;
-    border-color: var(--primary-light);
-    box-shadow: 0 20px 40px rgba(13, 16, 20, 0.06);
+    border-color: transparent;
+    box-shadow: none;
 }
+
+
 
 .modal-title {
     margin: 6px 0 18px;
@@ -433,18 +437,19 @@ footer {
 
 .form-control {
     width: 100%;
-    padding: 14px 16px;
-    border: 2px solid var(--gray-300);
-    border-radius: 10px;
-    font-size: 16px;
+    padding: 18px 18px;
+    border: 2px solid rgba(150,150,150,0.35);
+    border-radius: 16px;
+    font-size: 18px;
     background-color: var(--white);
-    transition: all 0.16s ease;
+    transition: border-color .12s ease, box-shadow .12s ease;
 }
 
+/* При фокусе — розовая рамка и лёгкая тень */
 .form-control:focus {
     border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 6px 20px rgba(255, 0, 107, 0.1);
+    box-shadow: 0 8px 24px rgba(255,0,107,0.08);
 }
 
 textarea.form-control {
@@ -456,12 +461,11 @@ textarea.form-control {
     text-align: center;
     margin-top: 18px;
     padding-top: 12px;
-    border-top: 1px solid var(--gray-100);
 }
 
 .muted-note {
-    color: var(--gray-600);
-    font-size: 14px;
+    color: #cfcfcf;
+    font-size: 16px;
     margin: 0;
 }
 
@@ -493,13 +497,18 @@ textarea.form-control {
 }
 
 .checkbox-group {
+    justify-content: center;
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 8px;
 }
 
-/* ===== AD FORM ===== */
+.checkbox-group a {
+    text-decoration: none !important;
+}
+
+
 .ad-form-container {
     max-width: 600px;
     margin: 0 auto;
@@ -819,6 +828,12 @@ textarea.form-control {
     background: rgba(220, 38, 38, 0.05);
     transform: translateY(-1px);
 }
+
+/* Убираем label над полями в модалке */
+.modal-content .form-group label {
+    display: none !important;
+}
+
 
 /* ===== АДАПТИВНОСТЬ ===== */
 
