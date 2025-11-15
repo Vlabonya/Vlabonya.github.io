@@ -30,7 +30,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    /* padding: 0 15px; */
 }
 
 /* ===== HEADER ===== */
@@ -248,15 +248,15 @@ main {
 }
 
 .load-more {
-    text-align: center;
-    margin-top: 20px;
-    padding: 0 15px;
+    display: flex;
+    justify-content: center;
 }
 
 .load-more .btn {
     display: block;
     width: 100%;
     max-width: 1200px;
+    box-sizing: border-box;
     margin: 0 auto;
     background: transparent;
     color: var(--primary-color);
@@ -838,9 +838,13 @@ textarea.form-control {
 /* ===== АДАПТИВНОСТЬ ===== */
 
 /* Планшет (768px) */
-@media (max-width: 768px) {
-    .container {
+@media (max-width: 1280px) {
+    /* .container {
         padding: 0 20px;
+    } */
+
+    .container {
+        max-width: 688px;
     }
 
     .header-content {
@@ -881,18 +885,16 @@ textarea.form-control {
         flex: 1 1 auto;
     }
     
-    .page-header .add-ad-btn,
+    /* .page-header .add-ad-btn,
     .add-ad-btn {
         margin: 0;
         flex: 0 0 auto;
-    }
+    } */
 
     .ads-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 24px;
-        margin-left: -6px;
-        margin-right: -6px;
+        gap: 20px;
     }
     
     .ads-grid .ad-card {
@@ -900,6 +902,7 @@ textarea.form-control {
         flex-direction: column;
         height: auto;
         align-items: flex-start;
+        min-width: 216px;
     }
 
     
@@ -994,11 +997,23 @@ textarea.form-control {
     .footer-right .footer-dev {
         text-align: left;
     }
+
+    .load-more .btn {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
 }
 
-@media (max-width: 320px) {
+@media (max-width: 768px) {
+
     /* небольшой внутренний отступ */
-    .container { padding: 0 12px; }
+    /* .container { padding: 0 12px; } */
+
+    .container {
+        max-width: 280px;
+    }
 
     /* скрываем текст 'Объявления' — остаётся только иконка */
     .logo { display: none !important; }
@@ -1025,34 +1040,45 @@ textarea.form-control {
         margin: 0 0 18px 0;
     }
 
-    /* кнопка добавить -> круглый плюс в правом верхнем углу блока заголовка */
+    /* кнопка добавить */
     .add-ad-btn {
-        /* скрываем текст, добавляем псевдо-символ '+' */
         width: 56px;
         height: 56px;
         padding: 0;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        right: 8px;
-        top: 6px;
+        border-radius: 14px;
+        background-color: var(--primary-color);
         box-shadow: 0 10px 28px rgba(255,0,107,0.14);
-        background: var(--primary-color);
-        color: var(--white);
-        text-decoration: none;
-        font-size: 0; /* скрываем исходный текст */
+        position: absolute;
+        right: 0px;
+        top: 16px;
+        border: none;
+        font-size: 0;
+        display: flex;
+        align-items: center;
+        justify-content:center;
         overflow: hidden;
     }
-    /* показываем plus через псевдоэлемент */
+
+    /* Убираем текстовый плюс */
     .add-ad-btn::after {
-        content: "+";
-        font-size: 26px;
-        line-height: 1;
-        color: #fff;
-        display: block;
+        content: none !important;
+        display: none !important;
     }
+
+    /* Показываем SVG-картинку плюса */
+    .add-ad-btn::before {
+        content: "";
+        display: block;                 
+        transform: translateX(5px);
+        width: 30px;
+        height: 30px;
+        background-image: url("../images/plus.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        pointer-events: none;
+    }
+
 
     /* Сетка объявлений: 2 колонки (на телефоне компактнее) */
     .ads-grid {
@@ -1112,59 +1138,36 @@ textarea.form-control {
         gap: 8px;                 /* расстояние между строками */
     }
     .footer-left .footer-email, .footer-right .footer-dev { text-align: center; }
+
+
+    .ads-grid .ad-card .ad-image-container {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .ads-grid .ad-card .ad-image-container img,
+    .ads-grid .ad-card img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+    }
+
+
+    .ads-grid .ad-card .ad-image {
+        border-radius: 12px;
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+    }
+
+    .ads-grid .ad-card .ad-image-container,
+    .ads-grid .ad-card .ad-image {
+        box-sizing: border-box;
+    }
 }
 
 .ads-grid .ad-card { align-items: stretch; }
 .ads-grid .ad-card .ad-image-container { flex-shrink: 0; }
 .ads-grid .ad-card .ad-content { flex-shrink: 0; }
-
-
-/* Большие экраны (1920px и больше) */
-@media (min-width: 1920px) {
-    .container {
-        max-width: 1400px;
-    }
-    
-    .ads-grid .ad-card {
-        width: calc(20% - 32px);
-    }
-    
-    .ad-grid {
-        max-width: 1400px;
-    }
-    
-    .left-col {
-        width: 600px;
-    }
-    
-    .photo-wrap {
-        height: 500px;
-    }
-    
-    .page-title {
-        font-size: 48px;
-    }
-    
-    .price {
-        font-size: 48px;
-    }
-}
-
-/* Промежуточные точки для планшетов */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .ads-grid .ad-card {
-        width: calc(33.333% - 27px);
-    }
-    
-    .ad-grid {
-        gap: 30px;
-    }
-    
-    .left-col {
-        width: 400px;
-    }
-    
-    .photo-wrap {
-        height: 350px;
-    }
-}
